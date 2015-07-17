@@ -82,4 +82,9 @@ public class Day {
 			break;
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "Day [day=" + day + ", month=" + month + ", year=" + year + "]";
+	}
 }

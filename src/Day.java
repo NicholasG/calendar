@@ -22,9 +22,9 @@
 
 public class Day {
 
-	int day;
-	int month;
-	int year;
+	private int day;
+	private int month;
+	private int year;
 
 	public Day(int day, int month, int year) {
 		this.day = day;
@@ -33,6 +33,12 @@ public class Day {
 		
 		if (year > 2000) {
 			this.year = year - 2000;
+		} else if (year < 2000 && year > 1899) {
+			this.year = year - 1900;
+		} else if (year < 1900 && year > 1799) {
+			this.year = year - 1800;
+		} else {
+			this.year = year - 1700;
 		}
 	}
 

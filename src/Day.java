@@ -25,21 +25,35 @@ public class Day {
 	private int day;
 	private int month;
 	private int year;
+	private int century;
+//	private String dayOfWeek;
 
 	public Day(int day, int month, int year) {
 		this.day = day;
 
 		switchAMonth(month);
-		
+
 		if (year > 2000) {
 			this.year = year - 2000;
+			this.century = 20;
 		} else if (year < 2000 && year > 1899) {
 			this.year = year - 1900;
+			this.century = 19;
 		} else if (year < 1900 && year > 1799) {
 			this.year = year - 1800;
+			this.century = 18;
 		} else {
 			this.year = year - 1700;
+			this.century = 18;
 		}
+
+//		dayOfWeek = dayOfWeek();
+	}
+
+	@Override
+	public String toString() {
+		return "Day [day=" + day + ", month=" + month + ", year=" + year + "]"
+				+ "\n" + "День тижня: " + dayOfWeek();
 	}
 
 	private void switchAMonth(int month) {
@@ -83,8 +97,27 @@ public class Day {
 		}
 	}
 
-	@Override
-	public String toString() {
-		return "Day [day=" + day + ", month=" + month + ", year=" + year + "]";
+	private String dayOfWeek() {
+		int w = day + (int) ((13 * month - 1) / 5) + year + (int) (year / 4)
+				+ (int) (century / 4) - 2 * century;
+
+		switch (w % 7) {
+		case 0:
+			return "Неділя";
+		case 1:
+			return "Понеділок";
+		case 2:
+			return "Вівторок";
+		case 3:
+			return "Середа";
+		case 4:
+			return "Четвер";
+		case 5:
+			return "П'ятниця";
+		case 6:
+			return "Субота";
+		default:
+			return null;
+		}
 	}
 }
